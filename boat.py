@@ -10,7 +10,7 @@ class Boat():
         self._barrier = Barrier(4)          # barreira
         self._n_hackers = 0                 # numero de hackers
         self._n_serfs = 0                   # numero de serfs
-        self._is_captain = False            
+        self._is_captain = False
 
     def signal_barrier(self):
         self._barrier.wait()
@@ -18,11 +18,14 @@ class Boat():
     def wait_mutex(self):
         self._mutex.acquire()
 
+    def unlock_mutex(self):
+        self._mutex.unlock()
+
     def release_mutex(self):
         self._mutex.release()
 
-    def begin_row(self):
-        self._is_captain = True
+    def status_captain(self, estado):
+        self._is_captain = estado
 
     def get_total(self):
         return self._n_hackers + self._n_serfs
@@ -30,5 +33,21 @@ class Boat():
     def get_n_serfs(self):
         return self._n_serfs
 
+    def increment_serfs(self):
+        self._n_serfs += 1
+
+    def decrement_serfs(self):
+        self._n_serfs -= 1
+
     def get_n_hackers(self):
         return self._n_hackers
+
+    def increment_hackers(self):
+        self._n_hackers += 1
+
+    def decrement_hackers(self):
+        self._n_hackers -= 1
+
+    def print_boat_fleet(self):
+        print('h:',self.get_n_hackers(),', s:',self.get_n_serfs())
+
