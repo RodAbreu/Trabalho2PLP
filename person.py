@@ -62,7 +62,7 @@ class Hacker(Person):
             boat.signal_barrier()
             boat.status_captain(True)
             boat.wait_mutex()
-            self.row(boat)  # duvida se o is_caption é o do boat
+            self.row(boat)
             boat.release_mutex()
         elif boat._n_hackers == boat.cap / 2 and boat._n_serfs == boat.cap / 2:
             boat.print_boat_fleet()
