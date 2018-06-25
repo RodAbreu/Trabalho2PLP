@@ -11,7 +11,10 @@ s = Serf("Serf")
 
 
 while(True):
-    p = Thread(target=h.board, args=(boat,)) if random.choice([True,False]) else Thread(target=s.board, args=(boat,))
+    if random.choice([True,False]):
+        p = Thread(target=h.board, args=(boat,))  
+    else 
+        p = Thread(target=s.board, args=(boat,))
     p.start()
     p._delete()
     
