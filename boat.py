@@ -1,16 +1,28 @@
-from threading import Thread, Semaphore, Barrier
+from threading import Thread, Semaphore, Barrier, Lock
 
 class Boat():
 
     def __init__(self, cap):
         self.cap = cap
-        self._mutex = Semaphore(1)
-        self._serfqueue = Semaphore(0)      # fila de serfs
-        self._hackerqueue = Semaphore(0)    # fila de hackers
+        self._mutex = Lock()                # mutex
+        self._serfqueue = Semaphore(4)      # fila de serfs
+        self._hackerqueue = Semaphore(4)    # fila de hackers
         self._barrier = Barrier(4)          # barreira
         self._n_hackers = 0                 # numero de hackers
         self._n_serfs = 0                   # numero de serfs
         self._is_captain = False
+
+    def wait_hacker(self):
+        self._hackerqueue.acquire()
+
+    def wait_serf(self):
+        self._serfqueue.acquire()
+
+    def release_hacker(self):
+        self._hackerqueue.release()
+
+    def release_serf(self):
+        self._serfqueue.release()
 
     def signal_barrier(self):
         self._barrier.wait()
