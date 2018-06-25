@@ -14,10 +14,9 @@ class Person(ABC):
         time.sleep(5)
 
         print("Unload!!\n")
-        boat.unlock_mutex()
+        boat.release_mutex()
 
         for x in range(0, boat.cap):
-            boat.release_mutex()
             pass
 
         boat.status_captain(False)
@@ -47,7 +46,7 @@ class Serf(Person):
             #pthread_mutex_lock(&args->boat->mutex);
             boat.wait_mutex()
 
-            Person.row(boat) #duvida se o is_caption é o do boat
+            self.row(boat) #duvida se o is_caption é o do boat
             boat._n_serfs = 0
             pass
         elif boat._n_hackers == boat.cap/2 and boat._n_serfs == boat.cap/2:
@@ -104,7 +103,7 @@ class Hacker(Person):
             # pthread_mutex_lock(&args->boat->mutex);
             boat.wait_mutex()
 
-            Person.row(boat)  # duvida se o is_caption é o do boat
+            self.row(boat)  # duvida se o is_caption é o do boat
             boat._n_hackers = 0
             pass
         elif boat._n_hackers == boat.cap / 2 and boat._n_serfs == boat.cap / 2:
@@ -118,7 +117,7 @@ class Hacker(Person):
             # pthread_mutex_lock(&args->boat->mutex);
             boat.wait_mutex()
 
-            Person.row(boat)
+            self.row(boat)
             boat._n_hackers = 0
             boat._n_serfs = 0
             pass
@@ -133,7 +132,7 @@ class Hacker(Person):
                 boat.signal_barrier()
 
                 # pthread_mutex_unlock(&(args->boat->mutex));
-                boat.unlock_mutex()
+                boat.release_mutex()
                 pass
         pass
         # sem_wait( & args->boat->serfs_queue);
