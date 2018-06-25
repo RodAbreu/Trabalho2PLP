@@ -13,7 +13,7 @@ s = Serf("Serf")
 while(True):
     if random.choice([True,False]):
         p = Thread(target=h.board, args=(boat,))  
-    else 
+    else:
         p = Thread(target=s.board, args=(boat,))
     p.start()
     
