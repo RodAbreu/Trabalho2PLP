@@ -16,7 +16,6 @@ while(True):
     else 
         p = Thread(target=s.board, args=(boat,))
     p.start()
-    p._delete()
     
 p.join()
 
