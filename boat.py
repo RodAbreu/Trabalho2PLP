@@ -18,9 +18,6 @@ class Boat():
     def wait_mutex(self):
         self._mutex.acquire()
 
-    # def unlock_mutex(self):
-    #     self._mutex.
-
     def release_mutex(self):
         self._mutex.release()
 
