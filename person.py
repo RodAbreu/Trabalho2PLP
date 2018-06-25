@@ -8,7 +8,6 @@ class Person(ABC):
         super().__init__()      # chamada do construtor da superclasse
 
     def row(self, boat):
-        # DONE: logica de remada
         
         print('Row!!\n')
         time.sleep(5)
@@ -20,7 +19,7 @@ class Person(ABC):
         boat._n_serfs = 0
         boat._n_hackers = 0
 
-    @abstractclassmethod        # metodo abstrato
+    @abstractclassmethod        
     def board(self, boat):
         pass
 
